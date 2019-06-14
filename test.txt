@@ -1,2 +1,2 @@
 
-version test 6.20
+version test 6.22
