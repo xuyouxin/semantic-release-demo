@@ -6,7 +6,7 @@
   "scripts": {
     "cm": "git-cz",
     "semantic-release": "semantic-release",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "semantic-release-local": "semantic-release pre --debug=false && npm publish && semantic-release post --debug=false"
   },
   "keywords": [],
   "author": "",
@@ -31,12 +31,18 @@
           "package.json",
           "package-lock.json",
           "CHANGELOG.md"
-        ],
-        "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+        ]
       }
     ],
     "plugins": [
-      "@semantic-release/commit-analyzer",
+
+      [
+        "@semantic-release/commit-analyzer",
+        {
+          "preset": "angular",
+          "releaseRules": "./config/release-rules.js"
+        }
+      ],
       "@semantic-release/release-notes-generator",
       [
         "@semantic-release/npm",
@@ -56,5 +62,8 @@
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
+  },
+  "dependencies": {
+    "semantic-release-cli": "^5.1.1"
   }
 }
